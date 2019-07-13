@@ -16,7 +16,44 @@
 //     [10,  9,  8, 7]]
 
 function matrix(n) {
-	// square n
+	const results = []
+	for (let i = 0; i < n; i++) {
+		results.push([])
+	}
+
+	let counter = 1
+	let startC = 0
+	let startR = 0
+	let endC = n - 1
+	let endR = n - 1
+
+	while (startC <= endC && startR <= endR) {
+		for(let i = startC; i <= endC; i++) {
+			results[startR][i] = counter
+			counter++
+		}
+		startR++
+
+		for(let i = startR; i <= endR; i++) {
+			results[i][endC] = counter
+			counter++
+		}
+		endC--
+
+		for(let i = endC; i >= startC; i--) {
+			results[endR][i] = counter
+			counter++
+		}
+		endR--
+
+		for(let i = endR; i >= startR; i--) {
+			results[i][startC] = counter
+			counter++
+		}
+		startC++
+	}
+	
+	return results
 }
 
 module.exports = matrix;
