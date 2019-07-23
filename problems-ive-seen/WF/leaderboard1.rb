@@ -34,7 +34,6 @@ class LeaderBoard
   end
   
   def add_score(player_id, score, time)
-
     p = player(player_id)
     # if player exists, only create a new instance of the score class
     if !!p 
@@ -54,26 +53,18 @@ class LeaderBoard
     # .sort uses quick sort I believe, n(log(n)) time/space complexity
     # sortedP = Player.all.sort {|p1, p2| p1.average_score <=> p2.average_score}
     #reversing so that the highest avg scores come first
-    @sorted_players.reverse.map do |p|
-      p.id
-    end[0, num_players] # only returning the array from the 0 index to the input number index
-  end
 
-  def bottom(num_players)
-    #sorting all the players by their avg score
-    # .sort uses quick sort I believe, n(log(n)) time/space complexity
-    sortedP = Player.all.sort {|p1, p2| p1.average_score <=> p2.average_score}
-    
-    sortedP.map do |p|
+    @sorted_players.reverse.map do |p|
       p.id
     end[0, num_players] # only returning the array from the 0 index to the input number index
   end
   
   def reset(player_id)
-    #this is disassociating the scores from the input player, the score instances still exist but have no relationship to a player
     player(player_id).scores.map do |score|
       score.score = 0
     end
+
+    @sorted_players = Player.all.sort {|p1, p2| p1.average_score <=> p2.average_score}
   end
   
   # private
@@ -127,7 +118,7 @@ class Player
 
     sum / (scores.length / 1.0)
     # scores.map do |score|
-    #   if score.score != nil
+    #   if score.score
     #     score.score
     #   end
     # end.reduce(:+) / (scores.length / 1.0) #.reduce(:+) sums all the numbers in the array
@@ -144,19 +135,19 @@ class Score
   # Score has a score and belongs to a player
   def initialize(score, player, time)
     if !expired?(time)
-      @player = player
       @score = score
+      @player = player
       @time = time
       @@all << self
     end
   end
 
   def expired?(time)
-    current_time = Time.now.to_i #converting to seconds
-    time2 = Time.parse(time).to_i
+    current_time = Time.now
+    time2 = Time.parse(time)
 
-    if current_time > time2
-      true
+    if current_time > time2 
+      true #this means it is expired
     else
       false
     end
@@ -167,24 +158,7 @@ class Score
   end
 end
 
-# leader = LeaderBoard.new()
-# player1 = Player.new(1, leader)
-# score1 = Score.new(100, player1)
-
-# leader.add_score(1, 100)
-# leader.add_score(1, 200)
-# leader.add_score(2, 123)
-# leader.add_score(3, 1234)
-# leader.add_score(2, 1848)
-# leader.add_score(2, 10823)
-# leader.add_score(4, 100)
-# leader.add_score(5, 10)
-
-# puts leader.reset(2)
-
-# leader.add_score(2, 100)
-
-leader_board = LeaderBoard.new()
+leader_board = LeaderBoard.new
 
 # leader_board.add_score(1, 50)
 
@@ -196,23 +170,25 @@ leader_board = LeaderBoard.new()
 
 # print(leader_board.top(3) == [3, 2, 1])
 # print(leader_board.top(2) == [3, 2])
-# puts(leader_board.bottom(3) == [1, 2, 3])
-# puts(leader_board.bottom(2) == [1, 2])
 
 # leader_board.reset(3)
+# puts leader_board.player(3).average_score
 
+# puts leader_board.top(3)
 # print(leader_board.top(3) == [2, 1, 3])
-# puts leader_board.add_score(1, 100, '2019-08-03')
-leader_board.add_score(1, 50, '2019-08-03')
-leader_board.add_score(1, 50, '2019-08-03')
-leader_board.add_score(1, 50, '2019-08-03')
-leader_board.add_score(1, 50, '2019-08-03')
-leader_board.add_score(2, 80, '2019-08-01')
-leader_board.add_score(3, 160, '2019-08-01')
-leader_board.add_score(4, 1000, '2019-08-01')
 
-leader_board.reset(4)
+leader_board.add_score(1, 50, '2019-08-03')
+leader_board.add_score(1, 50, '2019-08-03')
+leader_board.add_score(1, 50, '2019-08-03')
+leader_board.add_score(1, 50, '2019-07-03')
+leader_board.add_score(2, 80, '2019-07-01')
+leader_board.add_score(3, 160, '2019-07-01')
+leader_board.add_score(4, 1000, '2019-07-01')
 
-puts leader_board.add_score(2, 80, '2019-08-01')
-puts leader_board.top(3)
+puts leader_board.player(4).scores[0].time
+
+# leader_board.reset(4)
+
+# puts leader_board.add_score(2, 80, '2019-08-01')
+# puts leader_board.top(3)
 
