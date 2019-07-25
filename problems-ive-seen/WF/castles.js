@@ -1,6 +1,3 @@
-// you can write to stdout for debugging purposes, e.g.
-// console.log('this is a debug message');
-
 function solution(A) {
     
     // if all the numbers in the array are the same, return 1
