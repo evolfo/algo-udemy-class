@@ -15,7 +15,7 @@ function solution(A) {
     // Finding out if first values are a peak or valley
     for (let i = 0; i < A.length; i++) {
         if (A[i] !== A[i + 1]) {
-            pv = A[i] < A[i + 1]
+            pv = A[i] > A[i + 1]
             break
         }
     }
@@ -31,8 +31,7 @@ function solution(A) {
                 counter++
                 pv = !pv
             }
-        }
-        
+        } 
     }
     
     return counter
