@@ -1,0 +1,45 @@
+/* Image of the newsletter component for reference. Please don't remove. */
+body {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/273280/newsletter-new.png) no-repeat calc(100% - 10px) 10px;
+  margin: 0;
+  padding: 10px;
+}
+
+/*
+  Some hex values to help:
+
+  Blue: #008EBB
+  Light blue: 87E3FF
+  Gray: #989898
+
+*/
+
+.container {
+  width: 26vw;
+  font-family: helvetica;
+}
+
+.container h2 {
+  color: #008ebb;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: .6rem;
+  padding-bottom: .5rem;
+  border-top: 3px solid #008ebb;
+  border-bottom: 1px solid #008ebb;
+}
+
+.container p {
+  color: #989898;
+  font-weight: 500;
+}
+
+input {
+  margin-top: .4rem;
+  margin-bottom: .4rem;
+  padding: .6rem;
+}
+
+input[type="email"], input[type="submit"] {
+  width: 100%;
+}

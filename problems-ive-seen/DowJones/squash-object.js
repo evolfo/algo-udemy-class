@@ -25,11 +25,7 @@ const object2 = {
   }
 };
 
-function squashObject (obj, sums) {
-  if (!sums) { 
-    sums = {keys: 0, values: 0}
-  }
-  
+function squashObject (obj, sums = {keys: 0, values: 0}) {
   for (let i in obj) {
     let int = parseInt(i)
     if (typeof (obj[i]) === 'object' && !Array.isArray(obj[i])) {
