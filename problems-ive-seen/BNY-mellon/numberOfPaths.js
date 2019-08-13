@@ -51,6 +51,4 @@ function numberOfPaths(a, x = 0, y = 0) {
     }
 
     return right + down
-  }
-
-function main() {
+}
