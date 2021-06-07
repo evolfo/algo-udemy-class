@@ -1,4 +1,3 @@
-
 // INSTRUCTIONS:
 // 1.) start on the page that has the first transaction of the year you want to look at
 // 2.) paste this code into your console
@@ -28,7 +27,7 @@ const uberDollars = (year, card, final = 0) => {
 
   if(lastElement.includes(year)) {
 	setTimeout(() => {
-	  return uberDollars(year, card, final)
+	  return uberDollars(year, card, final)	
 	}, 4000)
   }
 
